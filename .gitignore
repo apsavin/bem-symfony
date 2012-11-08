@@ -1,0 +1,10 @@
+.bem/cache/
+node_modules/
+libs/
+pages/*/*.css
+pages/*/*.js
+!pages/*/*.bemjson.js
+pages/*/*.html
+pages/*/*.html.php
+tests/*
+!level.js
