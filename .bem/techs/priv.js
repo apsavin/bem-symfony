@@ -16,7 +16,7 @@ exports.techMixin = {
             (vars.ModVal ? '_' + vars.ModName + '_' + vars.ModVal : '');
 
         return Template.process([
-            "$blocks['{{bemSelector}}'] = function ($data, $view) {",
+            "$blocks['{{bemSelector}}'] = function ($data, $view, $blocks) {",
             '};'],
             vars);
     },
@@ -37,8 +37,8 @@ exports.techMixin = {
             '<?php',
             'function data_to_html($data, $view, $path, $block){',
             '   $blocks = [];',
-            res.toString().replace(/<\?php/g, ''),
-            '   $bemjson = $blocks[$block]($data, $view);',
+            res.join('').replace(/<\?php/g, ''),
+            '   $bemjson = $blocks[$block]($data, $view, $blocks);',
             "   $vjs = new V8js();",
             '   return $vjs->executeString( file_get_contents($path) . "BEMHTML.apply(" . json_encode($bemjson) . ");");',
             '}',
