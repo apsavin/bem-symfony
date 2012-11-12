@@ -6,7 +6,7 @@ var fs = require('fs'),
 exports.techMixin = {
 
     getBuildResultChunk: function (relPath, path) {
-        return fs.readFileSync(path) + '\n\n';
+        return '    include "' + path + '";\n';
     },
 
     getCreateResult: function (path, suffix, vars) {
@@ -37,7 +37,7 @@ exports.techMixin = {
             '<?php',
             'function data_to_html($data, $view, $path, $block){',
             '   $blocks = [];',
-            res.join('').replace(/<\?php/g, ''),
+            res.join(''),
             '   $bemjson = $blocks[$block]($data, $view, $blocks);',
             "   $vjs = new V8js();",
             '   return $vjs->executeString( file_get_contents($path) . "BEMHTML.apply(" . json_encode($bemjson) . ");");',
